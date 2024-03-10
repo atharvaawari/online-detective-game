@@ -1,0 +1,148 @@
+<%
+const data = [
+  {
+    question: `
+    <br>
+    <h3>Puzzle: The Mysterious Disappearance</h3>
+    <br>
+    <p><strong>The Crime Scene</strong></p>
+    <p>Detective Morgan was called to investigate the mysterious disappearance of a renowned magician, Mr. Victor Enigma. Enigma had been performing his latest illusion, "The Vanishing Lady," on stage at the Grand Theater. As the smoke cleared, both Enigma and his assistant, the "Vanishing Lady," were nowhere to be found.</p>
+    <br>
+    <strong>Waiter, Ms. Parker:</strong>
+    <p>Upon closer inspection, the detective found a hidden passage behind a large painting in the exhibit room. The thief had used this passage to access the jewels. Captain Turner was shocked to learn about the secret passage, and it was clear that the thief had intricate knowledge of the palace layout. The investigation turned toward palace insiders with access to such information.</p>
+    <br>
+    <strong>Hostess, Mrs. Anderson:</strong>
+    <p>Detective Morgan arrived at the Grand Theater to investigate the enigmatic disappearance of the celebrated magician, Mr. Victor Enigma. The audience had eagerly anticipated his performance of "The Vanishing Lady," a signature illusion that had never failed to astound.</p>
+    <br>
+    <p>As the smoke cleared and the dramatic music subsided, the audience erupted into applause, expecting Enigma and his assistant to take their bows. To everyone's bewilderment, the stage was empty. Enigma and the Vanishing Lady had seemingly vanished into thin air.</p>
+    `,
+    image: "https://images.pexels.com/photos/16195899/pexels-photo-16195899/free-photo-of-woman-with-bruised-face-on-red-background.jpeg?auto=compress&cs=tinysrgb&w=700"
+  },
+  {
+    question: `<p><strong>Part 2: The Witnesses</strong></p>
+    <br>
+    <p><strong>Stage Manager, Ms. Thompson:</strong>
+      Ms. Thompson, responsible for coordinating the performance, insisted that the illusion had unfolded precisely as rehearsed. However, she noted a peculiar flicker in the stage lights during the act. She also shared that Enigma had been unusually obsessed with perfecting the illusion in the days leading up to the grand performance.</p>
+    <br>
+    <p><strong>Fellow Magician, Mr. Presto:</strong>
+      Mr. Presto, a respected colleague of Enigma, divulged that he had encountered Enigma backstage before the show. Enigma appeared nervous and preoccupied, muttering to himself about the importance of the disappearing act. Presto, perplexed by the behavior, had no inkling of Enigma's whereabouts after the performance.</p>
+    <br>
+    <p><strong>Audience Member, Mrs. Simmons:</strong>
+      Mrs. Simmons, a devoted fan who had attended numerous Enigma shows, claimed to have witnessed an inexplicable event. She asserted that, amidst the dissipating smoke, she briefly saw Enigma and the Vanishing Lady reappear on stage before vanishing again. Mrs. Simmons was convinced it was not part of the planned illusion.</p>  
+    `,
+    image: "https://images.pexels.com/photos/2157191/pexels-photo-2157191.jpeg?auto=compress&cs=tinysrgb&w=700"
+  },
+  {
+    question: `<p><strong>Part 3: The Solution</strong></p>
+      <br>
+      <p>Detective Morgan meticulously examined the stage, scrutinizing every inch for hidden compartments or escape routes. His investigation revealed a concealed trapdoor beneath the stage, ingeniously designed to be activated by a specific sequence of lights. The odd flicker reported by Ms. Thompson turned out to be a signal to the backstage crew to initiate the trapdoor mechanism.</p>
+      <br>
+      <p>Enigma's obsessive rehearsal of the illusion served as a clever distraction, diverting attention away from the intricate workings behind the scenes. The motive became clear: Enigma sought to orchestrate a disappearance so mysterious and captivating that it would generate unprecedented publicity.</p>
+      <br>
+      <p>Confronted with the evidence, Enigma admitted to his grandiose plan. His intention was to reappear dramatically after the news of his disappearance had spread far and wide, ensuring that the legend of the vanishing act would forever be etched in the annals of magic. Detective Morgan, however, ensured that Enigma's disappearance did not escape the scrutiny of the law, adding a twist to the magician's carefully crafted narrative.</p>
+      `,
+    image: "https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700",
+  }
+];
+%>
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/static/styleSheets/style.css">
+</head>
+
+<body>
+
+  <main>
+    <section class="container">
+      <div class="quiz-container">
+        <h1>Detective IQ Challenge 18 </h1>
+  
+        <article id="contentBox">
+  
+          <div id="quesBox">Dummy</div>
+          <div id="imageBox">
+            <!-- <h3>image</h3> -->
+            <img id="puzzleImage" src="" alt="puzzle Image">
+          </div>
+  
+          <div class="btnBox">
+            <button id="prevBtn">Prev</button>
+            <button id="clueBtn">Next</button>
+          </div>
+        </article>
+  
+      </div>
+    </section>
+  </main>
+
+  <script>
+
+  const queBox = document.getElementById('quesBox')
+  // const imageBox = document.getElementById('imageBox')
+  const puzzleImage = document.getElementById('puzzleImage')
+  const nextBtn = document.getElementById('clueBtn')
+  const prevBtn = document.getElementById('prevBtn')
+  
+  const puzzleData = <%- JSON.stringify(data) %>;
+  let totalQuestions = puzzleData.length;
+  let currentQuestion = 0;
+  
+
+  const loadPuzzle =() =>{
+
+    if(currentQuestion >= totalQuestions) {
+      endPuzzle()
+    }
+    if(currentQuestion === 1) {
+      prevBtn.style.display = "block";
+    }
+    const puzzleQuestion = puzzleData[currentQuestion]
+    console.log('puzzle:', puzzleQuestion);
+
+    queBox.innerHTML = `${puzzleQuestion.question}`; 
+    // imageBox.innerHTML = puzzleQuestion.image;
+    puzzleImage.src = puzzleQuestion.image;
+  }
+
+  const startPuzzle = ()=> {
+    currentQuestion = 0;
+    prevBtn.style.display ="block";
+  }
+    
+  const  handleNextBtn =  ()=> {
+    currentQuestion++;
+    loadPuzzle();
+  }
+  const handlePrevBtn = ()=> {
+    currentQuestion--;
+    if(currentQuestion === 0) {
+      prevBtn.style.display = "none";
+    }
+    loadPuzzle();
+  }
+
+  nextBtn.addEventListener( 'click', ()=> {
+        handleNextBtn();
+  })
+  prevBtn.addEventListener('click', ()=>{
+    handlePrevBtn();
+  })
+
+  const endPuzzle =()=> {
+    const mainBox = document.getElementById('contentBox');
+    mainBox.innerHTML = `<h3> Puzzle Completed!</h3> <h6> Thank You For playing Puzzle</h6> `
+  }
+
+    loadPuzzle();
+
+  </script>
+</body>
+
+</html>
