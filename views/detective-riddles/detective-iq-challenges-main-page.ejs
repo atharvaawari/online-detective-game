@@ -63,85 +63,146 @@ const data = [
     <section class="container">
       <div class="quiz-container">
         <h1>Detective IQ Challenge 18 </h1>
-  
+
         <article id="contentBox">
-  
+
           <div id="quesBox">Dummy</div>
           <div id="imageBox">
             <!-- <h3>image</h3> -->
             <img id="puzzleImage" src="" alt="puzzle Image">
           </div>
-  
+
           <div class="btnBox">
             <button id="prevBtn">Prev</button>
+            <div id="score"></div>
             <button id="clueBtn">Next</button>
           </div>
+          <h4 id="ansBox"></h4>
         </article>
-  
+
       </div>
     </section>
   </main>
 
   <script>
+    const queBox = document.getElementById('quesBox')
+    // const imageBox = document.getElementById('imageBox')
+    const puzzleImage = document.getElementById('puzzleImage')
+    const nextBtn = document.getElementById('clueBtn')
+    const prevBtn = document.getElementById('prevBtn')
+    const scoreBox = document.getElementById('score')
+    const ansBox = document.getElementById('ansBox')
 
-  const queBox = document.getElementById('quesBox')
-  // const imageBox = document.getElementById('imageBox')
-  const puzzleImage = document.getElementById('puzzleImage')
-  const nextBtn = document.getElementById('clueBtn')
-  const prevBtn = document.getElementById('prevBtn')
-  
-  const puzzleData = <%- JSON.stringify(data) %>;
-  let totalQuestions = puzzleData.length;
-  let currentQuestion = 0;
-  
+    const puzzleData = <%- JSON.stringify(data) %>;
+    let totalQuestions = puzzleData.length;
+    let currentQuestion = 0;
+    let score = 0;
 
-  const loadPuzzle =() =>{
 
-    if(currentQuestion >= totalQuestions) {
-      endPuzzle()
+    const loadPuzzle = () => {
+
+      if (currentQuestion >= totalQuestions) {
+        endPuzzle()
+      }
+      if (currentQuestion === 1) {
+        prevBtn.style.display = "block";
+      }
+      
+      const puzzleQuestion = puzzleData[currentQuestion]
+      console.log('puzzle:', puzzleQuestion);
+
+      queBox.innerHTML = `${puzzleQuestion.question}`;
+      // imageBox.innerHTML = puzzleQuestion.image;
+      puzzleImage.src = puzzleQuestion.image;
+      scoreBox.innerHTML = `<span>Score:${score}</span>`
+      
     }
-    if(currentQuestion === 1) {
+
+    puzzleImage.addEventListener('click', (e) => {
+
+      // Get the position of the click relative to the image
+      var rect = event.target.getBoundingClientRect();
+      let x = Math.floor(event.clientX - rect.left);
+      let y = Math.floor(event.clientY - rect.top);
+
+      // Define the specific point you want to check (example: x=100, y=100)
+      let clueX = 264;
+      let clueY = 88;
+      let clueRadius = 30;
+      console.log(x)
+      console.log(y)
+
+      // Check if the click occurred at the specific point
+      let distance = Math.sqrt((x - clueX) ** 2 + (y - clueY) ** 2);
+      if (distance <= clueRadius) {
+        console.log('Message: Clicked at the specific point.');
+        score = score + 5;
+        scoreBox.innerHTML = `<span> Score:${score}</span>`
+
+        let circle = document.createElement('div');
+        circle.classList.add('circle');
+        circle.style.width = (2 * clueRadius) + 'px';
+        circle.style.height = (2 * clueRadius) + 'px';
+        circle.style.left = (clueX - clueRadius) + 'px';
+        circle.style.top = (clueY - clueRadius) + 'px';
+
+        // Add the circle to the image container
+        imageBox.appendChild(circle);
+
+        // Animate the circle
+        setTimeout(function() {
+          circle.style.opacity = '0'; // Fade out the circle
+          setTimeout(function() {
+            circle.remove(); // Remove the circle from the DOM
+            handleNextBtn();
+          }, 500); // Duration of the fade out animation
+        }, 1000); // Duration of the circle visibility
+
+      } else {
+        console.log('Message: Clicked, but not at the specific point.');
+        score = score - 5;
+        scoreBox.innerHTML = `<span> Score:${score}</span>`
+        ansBox.innerHTML = `Wrong Clue &#10060`
+        setTimeout(function() {
+          ansBox.innerHTML = '';
+        }, 3000);
+      }
+
+    });
+
+
+    const startPuzzle = () => {
+      currentQuestion = 0;
       prevBtn.style.display = "block";
     }
-    const puzzleQuestion = puzzleData[currentQuestion]
-    console.log('puzzle:', puzzleQuestion);
 
-    queBox.innerHTML = `${puzzleQuestion.question}`; 
-    // imageBox.innerHTML = puzzleQuestion.image;
-    puzzleImage.src = puzzleQuestion.image;
-  }
-
-  const startPuzzle = ()=> {
-    currentQuestion = 0;
-    prevBtn.style.display ="block";
-  }
-    
-  const  handleNextBtn =  ()=> {
-    currentQuestion++;
-    loadPuzzle();
-  }
-  const handlePrevBtn = ()=> {
-    currentQuestion--;
-    if(currentQuestion === 0) {
-      prevBtn.style.display = "none";
+    const handleNextBtn = () => {
+      currentQuestion++;
+      loadPuzzle();
     }
+    const handlePrevBtn = () => {
+      currentQuestion--;
+      if (currentQuestion === 0) {
+        prevBtn.style.display = "none";
+      }
+      loadPuzzle();
+    }
+
+    nextBtn.addEventListener('click', () => {
+      handleNextBtn();
+    })
+    prevBtn.addEventListener('click', () => {
+      handlePrevBtn();
+    })
+
+    const endPuzzle = () => {
+      const mainBox = document.getElementById('contentBox');
+      mainBox.innerHTML = `<h3> Puzzle Completed!</h3> <h6> Thank You For playing Puzzle</h6> <span> Score:${score}</span>`
+      scoreBox.innerHTML = `<span> Score:${score}</span>`
+      currentQuestion = 0;
+    }
+
     loadPuzzle();
-  }
-
-  nextBtn.addEventListener( 'click', ()=> {
-        handleNextBtn();
-  })
-  prevBtn.addEventListener('click', ()=>{
-    handlePrevBtn();
-  })
-
-  const endPuzzle =()=> {
-    const mainBox = document.getElementById('contentBox');
-    mainBox.innerHTML = `<h3> Puzzle Completed!</h3> <h6> Thank You For playing Puzzle</h6> `
-  }
-
-    loadPuzzle();
-
   </script>
 </body>
 
