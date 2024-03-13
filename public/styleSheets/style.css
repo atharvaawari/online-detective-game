@@ -113,4 +113,11 @@
     border: 2px solid rgb(84, 201, 16);
     background-color: transparent; /* Change color as needed */
     pointer-events: none; /* Make sure the circle doesn't interfere with clicks */
-}
+  }
+  .redCircle {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgb(201, 44, 16);
+    background-color: transparent; /* Change color as needed */
+    pointer-events: none; /* Make sure the circle doesn't interfere with clicks */
+  }
