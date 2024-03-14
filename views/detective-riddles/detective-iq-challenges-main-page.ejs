@@ -16,8 +16,11 @@ const data = [
 
     <br>
     <p>As the smoke cleared and the dramatic music subsided, the audience erupted into applause, expecting Enigma and his assistant to take their bows. To everyone's bewilderment, the stage was empty. Enigma and the Vanishing Lady had seemingly vanished into thin air.</p>
-    `,
-    image: "https://images.pexels.com/photos/16195899/pexels-photo-16195899/free-photo-of-woman-with-bruised-face-on-red-background.jpeg?auto=compress&cs=tinysrgb&w=700"
+    <div id="imageBox">
+    <img id="puzzleImage"  src="https://images.pexels.com/photos/16195899/pexels-photo-16195899/free-photo-of-woman-with-bruised-face-on-red-background.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" alt="puzzle-Image">
+    </div>
+    `
+    <!-- image: "https://images.pexels.com/photos/16195899/pexels-photo-16195899/free-photo-of-woman-with-bruised-face-on-red-background.jpeg?auto=compress&cs=tinysrgb&w=700" -->
   },
   {
     question: `<p><strong>Part 2: The Witnesses</strong></p>
@@ -29,9 +32,10 @@ const data = [
       Mr. Presto, a respected colleague of Enigma, divulged that he had encountered Enigma backstage before the show. Enigma appeared nervous and preoccupied, muttering to himself about the importance of the disappearing act. Presto, perplexed by the behavior, had no inkling of Enigma's whereabouts after the performance.</p>
     <br>
     <p><strong>Audience Member, Mrs. Simmons:</strong>
-      Mrs. Simmons, a devoted fan who had attended numerous Enigma shows, claimed to have witnessed an inexplicable event. She asserted that, amidst the dissipating smoke, she briefly saw Enigma and the Vanishing Lady reappear on stage before vanishing again. Mrs. Simmons was convinced it was not part of the planned illusion.</p>  
+      Mrs. Simmons, a devoted fan who had attended numerous Enigma shows, claimed to have witnessed an inexplicable event. She asserted that, amidst the dissipating smoke, she briefly saw Enigma and the Vanishing Lady reappear on stage before vanishing again. Mrs. Simmons was convinced it was not part of the planned illusion.</p>
+      <div id="imageBox"><img id="puzzleImage" src="https://images.pexels.com/photos/2157191/pexels-photo-2157191.jpeg?auto=compress&cs=tinysrgb&w=700" alt="puzzle-Image"></div>  
     `,
-    image: "https://images.pexels.com/photos/2157191/pexels-photo-2157191.jpeg?auto=compress&cs=tinysrgb&w=700"
+    <!-- image: "https://images.pexels.com/photos/2157191/pexels-photo-2157191.jpeg?auto=compress&cs=tinysrgb&w=700" -->
   },
   {
     question: `<p><strong>Part 3: The Solution</strong></p>
@@ -41,8 +45,9 @@ const data = [
       <p>Enigma's obsessive rehearsal of the illusion served as a clever distraction, diverting attention away from the intricate workings behind the scenes. The motive became clear: Enigma sought to orchestrate a disappearance so mysterious and captivating that it would generate unprecedented publicity.</p>
       <br>
       <p>Confronted with the evidence, Enigma admitted to his grandiose plan. His intention was to reappear dramatically after the news of his disappearance had spread far and wide, ensuring that the legend of the vanishing act would forever be etched in the annals of magic. Detective Morgan, however, ensured that Enigma's disappearance did not escape the scrutiny of the law, adding a twist to the magician's carefully crafted narrative.</p>,
+      <div id="imageBox"><img id="puzzleImage" src="https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700" alt="puzzle-Image"></div>
       `,
-    image: "https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700",
+    <!-- image: "https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700", -->
   }
 ];
 %>
@@ -68,9 +73,9 @@ const data = [
         <article id="contentBox">
 
           <div id="quesBox">Dummy</div>
-          <div id="imageBox">
+          <!-- <div id="imageBox">
             <img id="puzzleImage" src="" alt="puzzle-Image">
-          </div>
+          </div> -->
 
           <div class="btnBox">
             <button id="prevBtn">Prev</button>
@@ -85,7 +90,6 @@ const data = [
   </main>
 
   <script>
-
     const queBox = document.getElementById('quesBox')
     const imageBox = document.getElementById('imageBox')
     const puzzleImage = document.getElementById('puzzleImage')
@@ -93,7 +97,7 @@ const data = [
     const prevBtn = document.getElementById('prevBtn')
     const scoreBox = document.getElementById('score')
     const ansBox = document.getElementById('ansBox')
-    // const contentBox = document.getElementById()
+
 
 
     const puzzleData = <%- JSON.stringify(data) %>;
@@ -102,22 +106,21 @@ const data = [
     let score = 0;
     // Define the specific point you want to check (example: x=100, y=100)
     let clueX = 37;
-      let clueY = 43;
-      let clueRadius = 5;
-      // console.log(x)
-      // console.log(y)
-      // console.log(clueX);
-      // console.log(clueY);
-      // console.log(clueRadius)
+    let clueY = 43;
+    let clueRadius = 5;
+    // console.log(x)
+    // console.log(y)
+    // console.log(clueX);
+    // console.log(clueY);
+    // console.log(clueRadius)
     let circle = document.createElement('div');
-        circle.classList.add('circle');
-        circle.style.width = (2 * clueRadius) + '%';
-        circle.style.height = (2 * clueRadius) + '%';
-        circle.style.left = (clueX - clueRadius) + '%';
-        circle.style.top = (clueY - clueRadius) + '%';
-        // console.log((clueX - clueRadius) + '%');
-        // console.log((clueY - clueRadius) + '%');
-
+    circle.classList.add('circle');
+    circle.style.width = (2 * clueRadius) + '%';
+    circle.style.height = (2 * clueRadius) + '%';
+    circle.style.left = (clueX - clueRadius) + '%';
+    circle.style.top = (clueY - clueRadius) + '%';
+    // console.log((clueX - clueRadius) + '%');
+    // console.log((clueY - clueRadius) + '%');
 
 
     const loadPuzzle = () => {
@@ -128,83 +131,87 @@ const data = [
       if (currentQuestion === 1) {
         prevBtn.style.display = "block";
       }
-
       const puzzleQuestion = puzzleData[currentQuestion]
       // console.log('puzzle:', puzzleQuestion);
       queBox.innerHTML = `${puzzleQuestion.question}`;
+      const quesImage = document.querySelector('#puzzleImage')
       // imageBox.innerHTML = puzzleQuestion.image;
-      puzzleImage.src = puzzleQuestion.image;
+      const quesImageBox = document.querySelector('#quesBox #imageBox')
+      // console.log(quesImageBox)
+      // console.log(quesImage)
+
+      // puzzleImage.src = quesBox.src;
 
       scoreBox.innerHTML = `<span>Score:${score}</span>`
 
-    }
+      quesImage.addEventListener('click', (e) => {
 
-    puzzleImage.addEventListener('click', (e) => {
+        // Get the position of the click relative to the image
+        var rect = event.target.getBoundingClientRect();
+        let x = Math.floor((event.clientX - rect.left) / rect.width * 100);
+        let y = Math.floor((event.clientY - rect.top) / rect.height * 100);
 
-      // Get the position of the click relative to the image
-      var rect = event.target.getBoundingClientRect();
-      let x = Math.floor((event.clientX - rect.left) / rect.width * 100);
-      let y = Math.floor((event.clientY - rect.top) / rect.height * 100);
+        // Check if the click occurred at the specific point
 
-      // Check if the click occurred at the specific point
+        // let distance = Math.sqrt((x - clueX) ** 2 + (y - clueY) ** 2);
+        let distance = Math.sqrt(Math.pow((x - clueX), 2) + Math.pow((y - clueY), 2));
 
-      // let distance = Math.sqrt((x - clueX) ** 2 + (y - clueY) ** 2);
-      let distance = Math.sqrt(Math.pow((x - clueX), 2) + Math.pow((y - clueY), 2));
+        if (distance <= clueRadius) {
+          // console.log('Message: Clicked at the specific point.');
+          score = score + 5;
+          scoreBox.innerHTML = `<span> Score:${score}</span>`
 
-      if (distance <= clueRadius) {
-        // console.log('Message: Clicked at the specific point.');
-        score = score + 5;
-        scoreBox.innerHTML = `<span> Score:${score}</span>`
 
-        
-        // Add the circle to the image container
-        imageBox.appendChild(circle);
+          // Add the circle to the image container
+          quesImageBox.appendChild(circle);
 
-        // Animate the circle
-        // setTimeout(function() {
-        //   circle.style.opacity = '0'; // Fade out the circle
-        //   setTimeout(function() {
-        //     circle.remove(); // Remove the circle from the DOM
-        //     // handleNextBtn();
-        //   }, 3000); // Duration of the fade out animation
-        // }, 1000); // Duration of the circle visibility
+          // Animate the circle
+          // setTimeout(function() {
+          //   circle.style.opacity = '0'; // Fade out the circle
+          //   setTimeout(function() {
+          //     circle.remove(); // Remove the circle from the DOM
+          //     // handleNextBtn();
+          //   }, 3000); // Duration of the fade out animation
+          // }, 1000); // Duration of the circle visibility
 
-      } else {
-        // console.log('Message: Clicked, but not at the specific point.');
-        // score = score - 5;
-        scoreBox.innerHTML = `<span> Score:${score}</span>`
+        } else {
+          // console.log('Message: Clicked, but not at the specific point.');
+          // score = score - 5;
+          scoreBox.innerHTML = `<span> Score:${score}</span>`
 
-        let redCircle = document.createElement('div');
-        redCircle.classList.add('redCircle');
-        redCircle.style.width = (2 * clueRadius) + '%';
-        redCircle.style.height = (2 * clueRadius) + '%';
-        redCircle.style.left = (x - clueRadius) + '%';
-        redCircle.style.top = (y - clueRadius) + '%';
+          let redCircle = document.createElement('div');
+          redCircle.classList.add('redCircle');
+          redCircle.style.width = (2 * clueRadius) + '%';
+          redCircle.style.height = (2 * clueRadius) + '%';
+          redCircle.style.left = (x - clueRadius) + '%';
+          redCircle.style.top = (y - clueRadius) + '%';
 
-        // Add the redcircle to the image container
-        imageBox.appendChild(redCircle);
+          // Add the redcircle to the image container
+          quesImageBox.appendChild(redCircle);
 
-        // Animate the redcircle
-        setTimeout(function() {
-          redCircle.style.opacity = '0'; // Fade out the circle
+          // Animate the redcircle
           setTimeout(function() {
-            redCircle.remove(); // Remove the circle from the DOM
-          }, 500); // Duration of the fade out animation
-        }, 1000); // Duration of the circle visibility
+            redCircle.style.opacity = '0'; // Fade out the circle
+            setTimeout(function() {
+              redCircle.remove(); // Remove the circle from the DOM
+            }, 500); // Duration of the fade out animation
+          }, 1000); // Duration of the circle visibility
 
-        ansBox.innerHTML = `Wrong Clue &#10060`
-        setTimeout(function() {
-          ansBox.innerHTML = '';
-        }, 3000);
-      }
-      
-    });
+          ansBox.innerHTML = `Wrong Clue &#10060`
+          setTimeout(function() {
+            ansBox.innerHTML = '';
+          }, 3000);
+        }
+
+      });
+    }
 
 
     const startPuzzle = () => {
       currentQuestion = 0;
       prevBtn.style.display = "block";
     }
+
 
     const handleNextBtn = () => {
       currentQuestion++;
@@ -227,11 +234,11 @@ const data = [
     })
 
     const endPuzzle = () => {
+      currentQuestion = 0;
       const mainBox = document.getElementById('contentBox');
       mainBox.innerHTML = `<h3> Puzzle Completed!</h3> <h6> Thank You For playing Puzzle</h6> <span> Score:${score}</span>`
       scoreBox.innerHTML = `<span> Score:${score}</span>`
       // submitPuzzle();
-      currentQuestion = 0;
     }
 
     const submitPuzzle = () => {
@@ -250,7 +257,6 @@ const data = [
         .then((response) => response.json())
         .then((json) => console.log(json));
     }
-
 
     loadPuzzle();
   </script>
