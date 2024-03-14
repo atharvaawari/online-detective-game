@@ -13,6 +13,7 @@ const data = [
     <br>
     <strong>Hostess, Mrs. Anderson:</strong>
     <p>Detective Morgan arrived at the Grand Theater to investigate the enigmatic disappearance of the celebrated magician, Mr. Victor Enigma. The audience had eagerly anticipated his performance of "The Vanishing Lady," a signature illusion that had never failed to astound.</p>
+
     <br>
     <p>As the smoke cleared and the dramatic music subsided, the audience erupted into applause, expecting Enigma and his assistant to take their bows. To everyone's bewilderment, the stage was empty. Enigma and the Vanishing Lady had seemingly vanished into thin air.</p>
     `,
@@ -39,7 +40,7 @@ const data = [
       <br>
       <p>Enigma's obsessive rehearsal of the illusion served as a clever distraction, diverting attention away from the intricate workings behind the scenes. The motive became clear: Enigma sought to orchestrate a disappearance so mysterious and captivating that it would generate unprecedented publicity.</p>
       <br>
-      <p>Confronted with the evidence, Enigma admitted to his grandiose plan. His intention was to reappear dramatically after the news of his disappearance had spread far and wide, ensuring that the legend of the vanishing act would forever be etched in the annals of magic. Detective Morgan, however, ensured that Enigma's disappearance did not escape the scrutiny of the law, adding a twist to the magician's carefully crafted narrative.</p>
+      <p>Confronted with the evidence, Enigma admitted to his grandiose plan. His intention was to reappear dramatically after the news of his disappearance had spread far and wide, ensuring that the legend of the vanishing act would forever be etched in the annals of magic. Detective Morgan, however, ensured that Enigma's disappearance did not escape the scrutiny of the law, adding a twist to the magician's carefully crafted narrative.</p>,
       `,
     image: "https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700",
   }
@@ -68,8 +69,7 @@ const data = [
 
           <div id="quesBox">Dummy</div>
           <div id="imageBox">
-            <!-- <h3>image</h3> -->
-            <img id="puzzleImage" src="" alt="puzzle Image">
+            <img id="puzzleImage" src="" alt="puzzle-Image">
           </div>
 
           <div class="btnBox">
@@ -87,12 +87,13 @@ const data = [
   <script>
 
     const queBox = document.getElementById('quesBox')
-    // const imageBox = document.getElementById('imageBox')
+    const imageBox = document.getElementById('imageBox')
     const puzzleImage = document.getElementById('puzzleImage')
     const nextBtn = document.getElementById('clueBtn')
     const prevBtn = document.getElementById('prevBtn')
     const scoreBox = document.getElementById('score')
     const ansBox = document.getElementById('ansBox')
+    // const contentBox = document.getElementById()
 
 
     const puzzleData = <%- JSON.stringify(data) %>;
@@ -196,7 +197,7 @@ const data = [
           ansBox.innerHTML = '';
         }, 3000);
       }
-
+      
     });
 
 

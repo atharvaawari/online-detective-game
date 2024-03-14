@@ -1,124 +1,140 @@
+* {
+  font-family: Arial, sans-serif;
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
 
- *{
-    font-family: Arial, sans-serif;
-    padding: 0%;
-    margin: 0%;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
+.container {
+  background: rgb(53, 67, 82);
+  width: 100%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: auto;
+
+}
+
+.quiz-container {
+  margin: auto;
+  background: white;
+  width: 55%;
+  height: auto;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  padding: 0% 3%;
+  justify-content: center;
+  gap: 25px;
+}
+
+/* Media query for devices with max-width of 768px (tablets and below) */
+@media only screen and (max-width: 950px) {
+  .quiz-container {
+    width: 90%;
+    /* Adjust width for smaller screens */
   }
+}
+
+/* Media query for devices with max-width of 480px (mobile devices) */
+@media only screen and (max-width: 480px) {
+  .quiz-container {
+    width: 95%;
+    /* Adjust width for smaller screens */
+  }
+}
+
+#contentBox {
+  width: auto;
+  min-height: 100vh;
+  height: auto;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  gap: 10px;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 5%;
+}
+
+
+#imageBox {
+  min-width: 100%;
+  /* overflow: hidden; */
+  /* border: 1px solid black; */
+  border-radius: 10px;
+  position: relative;
+  display: block;
+  transition: all 0.5s ease-in-out;
+}
+
+#imageBox img {
+  width: 100%;
+  border-radius: 10px;
+  position: relative;
+  top: 0;
+  left: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.btnBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  padding-top: 20px;
+}
+
+
+
+#clueBtn {
+  width: 20%;
+  height: 2rem;
+  border: 1px solid blueviolet;
+  border-radius: 5px;
+  background: rgb(215, 215, 55);
+  font-size: larger;
+}
+
+#score {
+  width: 20%;
+  height: 2rem;
+  font-size: larger;
+}
+
+#prevBtn {
+  width: 20%;
+  height: 2rem;
+  border: 1px solid blueviolet;
+  border-radius: 5px;
+  background: rgb(127, 207, 101);
+  font-size: larger;
+  display: none;
   
-  .container {
-    background: rgb(53, 67, 82);
-    width: 100%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    height: auto;
-
-  }
-
-  .quiz-container{
-    margin: auto;
-    background: white;
-    width: 55%;
-    height: auto;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 0% 3% ;
-    justify-content: center;
-    gap: 25px;
-  }
-
-  /* Media query for devices with max-width of 768px (tablets and below) */
-  @media only screen and (max-width: 950px ) {
-    .quiz-container {
-      width: 90%; /* Adjust width for smaller screens */
-    }
-  }
-
-  /* Media query for devices with max-width of 480px (mobile devices) */
-  @media only screen and (max-width: 480px) {
-    .quiz-container {
-      width: 95%; /* Adjust width for smaller screens */
-    }
-  }
-  
-  #contentBox{
-    width: auto;
-    min-height: 80vh;
-    margin: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px;
-    margin: 10px;
-    gap: 10px;
-  }
-
-  h1{
-    text-align: center;  
-    margin-top: 5%;
-  }
-
-  pre {
-    text-align: center;
-    width: 60vw;
-    font-size: larger;
-  }
-  
-  #imageBox{
-    min-width: 100%;
-    /* border: 1px solid black; */
-    border-radius: 10px;
-    position: relative;
-    display: block;
-  }
-
-  #imageBox img {
-    width: 100%;
-    border-radius: 10px;
-  }
-
-  .btnBox{
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    padding-top: 10px;
-  }
+}
 
 
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgb(84, 201, 16);
+  background-color: transparent;
+  /* Change color as needed */
+  pointer-events: none;
+  /* Make sure the circle doesn't interfere with clicks */
+}
 
-  #clueBtn{
-    width: 20%;
-    height: 2rem;
-    border: 1px solid blueviolet;
-    border-radius: 5px;
-    background: rgb(215, 215, 55);
-    font-size: larger;
-  }
-  #prevBtn {
-    width: 20%;
-    height: 2rem;
-    border: 1px solid blueviolet;
-    border-radius: 5px;
-    background: rgb(127, 207, 101);
-    font-size: larger;
-    display: none;
-  }
-
-
-  .circle {
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid rgb(84, 201, 16);
-    background-color: transparent; /* Change color as needed */
-    pointer-events: none; /* Make sure the circle doesn't interfere with clicks */
-  }
-  .redCircle {
-    position: absolute;
-    border-radius: 50%;
-    border: 2px solid rgb(201, 44, 16);
-    background-color: transparent; /* Change color as needed */
-    pointer-events: none; /* Make sure the circle doesn't interfere with clicks */
-  }
+.redCircle {
+  position: absolute;
+  border-radius: 50%;
+  border: 2px solid rgb(201, 44, 16);
+  background-color: transparent;
+  /* Change color as needed */
+  pointer-events: none;
+  /* Make sure the circle doesn't interfere with clicks */
+}
