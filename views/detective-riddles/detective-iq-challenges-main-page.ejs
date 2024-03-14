@@ -85,6 +85,7 @@ const data = [
   </main>
 
   <script>
+
     const queBox = document.getElementById('quesBox')
     // const imageBox = document.getElementById('imageBox')
     const puzzleImage = document.getElementById('puzzleImage')
@@ -93,14 +94,32 @@ const data = [
     const scoreBox = document.getElementById('score')
     const ansBox = document.getElementById('ansBox')
 
+
     const puzzleData = <%- JSON.stringify(data) %>;
     let totalQuestions = puzzleData.length;
     let currentQuestion = 0;
     let score = 0;
+    // Define the specific point you want to check (example: x=100, y=100)
+    let clueX = 37;
+      let clueY = 43;
+      let clueRadius = 5;
+      // console.log(x)
+      // console.log(y)
+      // console.log(clueX);
+      // console.log(clueY);
+      // console.log(clueRadius)
+    let circle = document.createElement('div');
+        circle.classList.add('circle');
+        circle.style.width = (2 * clueRadius) + '%';
+        circle.style.height = (2 * clueRadius) + '%';
+        circle.style.left = (clueX - clueRadius) + '%';
+        circle.style.top = (clueY - clueRadius) + '%';
+        // console.log((clueX - clueRadius) + '%');
+        // console.log((clueY - clueRadius) + '%');
+
 
 
     const loadPuzzle = () => {
-
       if (currentQuestion >= totalQuestions) {
         endPuzzle()
         submitPuzzle();
@@ -110,11 +129,11 @@ const data = [
       }
 
       const puzzleQuestion = puzzleData[currentQuestion]
-      console.log('puzzle:', puzzleQuestion);
-
+      // console.log('puzzle:', puzzleQuestion);
       queBox.innerHTML = `${puzzleQuestion.question}`;
       // imageBox.innerHTML = puzzleQuestion.image;
       puzzleImage.src = puzzleQuestion.image;
+
       scoreBox.innerHTML = `<span>Score:${score}</span>`
 
     }
@@ -123,47 +142,31 @@ const data = [
 
       // Get the position of the click relative to the image
       var rect = event.target.getBoundingClientRect();
-      let x = Math.floor((event.clientX - rect.left) / rect.width *100);
-      let y = Math.floor((event.clientY - rect.top) / rect.height *100);
+      let x = Math.floor((event.clientX - rect.left) / rect.width * 100);
+      let y = Math.floor((event.clientY - rect.top) / rect.height * 100);
 
-      // Define the specific point you want to check (example: x=100, y=100)
-      let clueX = 37 ;
-      let clueY = 43 ;
-      let clueRadius = 5;
-      // console.log(x)
-      // console.log(y)
-      // console.log(clueX);
-      // console.log(clueY);
-      // console.log(clueRadius)
-      
       // Check if the click occurred at the specific point
+
       // let distance = Math.sqrt((x - clueX) ** 2 + (y - clueY) ** 2);
       let distance = Math.sqrt(Math.pow((x - clueX), 2) + Math.pow((y - clueY), 2));
+
       if (distance <= clueRadius) {
         // console.log('Message: Clicked at the specific point.');
         score = score + 5;
         scoreBox.innerHTML = `<span> Score:${score}</span>`
 
-        let circle = document.createElement('div');
-        circle.classList.add('circle');
-        circle.style.width = (2 * clueRadius) + '%';
-        circle.style.height = (2 * clueRadius) + '%';
-        circle.style.left = (clueX - clueRadius) + '%';
-        circle.style.top = (clueY - clueRadius) + '%';
-        console.log((clueX - clueRadius) + '%');
-        console.log((clueY - clueRadius) + '%');
-
+        
         // Add the circle to the image container
         imageBox.appendChild(circle);
 
         // Animate the circle
-        setTimeout(function() {
-          circle.style.opacity = '0'; // Fade out the circle
-          setTimeout(function() {
-            circle.remove(); // Remove the circle from the DOM
-            handleNextBtn();
-          }, 500); // Duration of the fade out animation
-        }, 1000); // Duration of the circle visibility
+        // setTimeout(function() {
+        //   circle.style.opacity = '0'; // Fade out the circle
+        //   setTimeout(function() {
+        //     circle.remove(); // Remove the circle from the DOM
+        //     // handleNextBtn();
+        //   }, 3000); // Duration of the fade out animation
+        // }, 1000); // Duration of the circle visibility
 
       } else {
         // console.log('Message: Clicked, but not at the specific point.');
@@ -205,6 +208,7 @@ const data = [
     const handleNextBtn = () => {
       currentQuestion++;
       loadPuzzle();
+      circle.remove();
     }
     const handlePrevBtn = () => {
       currentQuestion--;
@@ -229,10 +233,7 @@ const data = [
       currentQuestion = 0;
     }
 
-
-
     const submitPuzzle = () => {
-
       let options = {
         method: "POST",
         headers: {
@@ -244,11 +245,11 @@ const data = [
           userId: 1,
         }),
       }
-
       fetch('https://jsonplaceholder.typicode.com/posts', options)
         .then((response) => response.json())
         .then((json) => console.log(json));
     }
+
 
     loadPuzzle();
   </script>
