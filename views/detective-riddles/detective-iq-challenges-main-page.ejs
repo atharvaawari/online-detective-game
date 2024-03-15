@@ -19,8 +19,10 @@ const data = [
     <div id="imageBox">
     <img id="puzzleImage"  src="https://images.pexels.com/photos/16195899/pexels-photo-16195899/free-photo-of-woman-with-bruised-face-on-red-background.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=700" alt="puzzle-Image">
     </div>
-    `
-    <!-- image: "https://images.pexels.com/photos/16195899/pexels-photo-16195899/free-photo-of-woman-with-bruised-face-on-red-background.jpeg?auto=compress&cs=tinysrgb&w=700" -->
+    `,
+    cordinateX: 37,
+    cordinateY: 43,
+    imageClueRadius:5,
   },
   {
     question: `<p><strong>Part 2: The Witnesses</strong></p>
@@ -35,7 +37,9 @@ const data = [
       Mrs. Simmons, a devoted fan who had attended numerous Enigma shows, claimed to have witnessed an inexplicable event. She asserted that, amidst the dissipating smoke, she briefly saw Enigma and the Vanishing Lady reappear on stage before vanishing again. Mrs. Simmons was convinced it was not part of the planned illusion.</p>
       <div id="imageBox"><img id="puzzleImage" src="https://images.pexels.com/photos/2157191/pexels-photo-2157191.jpeg?auto=compress&cs=tinysrgb&w=700" alt="puzzle-Image"></div>  
     `,
-    <!-- image: "https://images.pexels.com/photos/2157191/pexels-photo-2157191.jpeg?auto=compress&cs=tinysrgb&w=700" -->
+    cordinateX: 37,
+    cordinateY: 19,
+    imageClueRadius:5,
   },
   {
     question: `<p><strong>Part 3: The Solution</strong></p>
@@ -47,7 +51,9 @@ const data = [
       <p>Confronted with the evidence, Enigma admitted to his grandiose plan. His intention was to reappear dramatically after the news of his disappearance had spread far and wide, ensuring that the legend of the vanishing act would forever be etched in the annals of magic. Detective Morgan, however, ensured that Enigma's disappearance did not escape the scrutiny of the law, adding a twist to the magician's carefully crafted narrative.</p>,
       <div id="imageBox"><img id="puzzleImage" src="https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700" alt="puzzle-Image"></div>
       `,
-    <!-- image: "https://images.pexels.com/photos/6424244/pexels-photo-6424244.jpeg?auto=compress&cs=tinysrgb&w=700", -->
+      cordinateX: 12,
+      cordinateY: 71,
+      imageClueRadius:7,
   }
 ];
 %>
@@ -97,31 +103,13 @@ const data = [
     const prevBtn = document.getElementById('prevBtn')
     const scoreBox = document.getElementById('score')
     const ansBox = document.getElementById('ansBox')
+    const circle = document.createElement('div');
 
 
-
+    let currentQuestion = 0;
     const puzzleData = <%- JSON.stringify(data) %>;
     let totalQuestions = puzzleData.length;
-    let currentQuestion = 0;
     let score = 0;
-    // Define the specific point you want to check (example: x=100, y=100)
-    let clueX = 37;
-    let clueY = 43;
-    let clueRadius = 5;
-    // console.log(x)
-    // console.log(y)
-    // console.log(clueX);
-    // console.log(clueY);
-    // console.log(clueRadius)
-    let circle = document.createElement('div');
-    circle.classList.add('circle');
-    circle.style.width = (2 * clueRadius) + '%';
-    circle.style.height = (2 * clueRadius) + '%';
-    circle.style.left = (clueX - clueRadius) + '%';
-    circle.style.top = (clueY - clueRadius) + '%';
-    // console.log((clueX - clueRadius) + '%');
-    // console.log((clueY - clueRadius) + '%');
-
 
     const loadPuzzle = () => {
       if (currentQuestion >= totalQuestions) {
@@ -131,6 +119,7 @@ const data = [
       if (currentQuestion === 1) {
         prevBtn.style.display = "block";
       }
+
       const puzzleQuestion = puzzleData[currentQuestion]
       // console.log('puzzle:', puzzleQuestion);
       queBox.innerHTML = `${puzzleQuestion.question}`;
@@ -139,71 +128,74 @@ const data = [
       const quesImageBox = document.querySelector('#quesBox #imageBox')
       // console.log(quesImageBox)
       // console.log(quesImage)
-
       // puzzleImage.src = quesBox.src;
 
       scoreBox.innerHTML = `<span>Score:${score}</span>`
 
-      quesImage.addEventListener('click', (e) => {
+      if (quesImage) {
+        quesImage.addEventListener('click', (e) => {
+          e.preventDefault();
 
-        // Get the position of the click relative to the image
-        var rect = event.target.getBoundingClientRect();
-        let x = Math.floor((event.clientX - rect.left) / rect.width * 100);
-        let y = Math.floor((event.clientY - rect.top) / rect.height * 100);
+          // Define the specific point you want to check (example: x=100, y=100)
+          let clueX = puzzleQuestion.cordinateX;
+          let clueY = puzzleQuestion.cordinateY;
+          let clueRadius = puzzleQuestion.imageClueRadius;
 
-        // Check if the click occurred at the specific point
+          // Get the position of the click relative to the image
+          var rect = event.target.getBoundingClientRect();
+          let x = Math.floor((event.clientX - rect.left) / rect.width * 100);
+          let y = Math.floor((event.clientY - rect.top) / rect.height * 100);
+          // console.log(x)
+          // console.log(y)
 
-        // let distance = Math.sqrt((x - clueX) ** 2 + (y - clueY) ** 2);
-        let distance = Math.sqrt(Math.pow((x - clueX), 2) + Math.pow((y - clueY), 2));
+          // Check if the click occurred at the specific point
+          // let distance = Math.sqrt((x - clueX) ** 2 + (y - clueY) ** 2);
+          let distance = Math.sqrt(Math.pow((x - clueX), 2) + Math.pow((y - clueY), 2));
 
-        if (distance <= clueRadius) {
-          // console.log('Message: Clicked at the specific point.');
-          score = score + 5;
-          scoreBox.innerHTML = `<span> Score:${score}</span>`
+          if (distance <= clueRadius) {
+            // console.log('Message: Clicked at the specific point.');
+            score = score + 5;
+            scoreBox.innerHTML = `<span> Score:${score}</span>`
+
+            circle.classList.add('circle');
+            circle.style.width = (2 * clueRadius) + '%';
+            circle.style.height = (2 * clueRadius) + '%';
+            circle.style.left = (clueX - clueRadius) + '%';
+            circle.style.top = (clueY - clueRadius) + '%';
+            // console.log((clueX - clueRadius) + '%');
+            // console.log((clueY - clueRadius) + '%');
+
+            // Add the circle to the image container
+            quesImageBox.appendChild(circle);
 
 
-          // Add the circle to the image container
-          quesImageBox.appendChild(circle);
+          } else {
+            // console.log('Message: Clicked, but not at the specific point.');
+            let redCircle = document.createElement('div');
+            redCircle.classList.add('redCircle');
+            redCircle.style.width = (2 * clueRadius) + '%';
+            redCircle.style.height = (2 * clueRadius) + '%';
+            redCircle.style.left = (x - clueRadius) + '%';
+            redCircle.style.top = (y - clueRadius) + '%';
 
-          // Animate the circle
-          // setTimeout(function() {
-          //   circle.style.opacity = '0'; // Fade out the circle
-          //   setTimeout(function() {
-          //     circle.remove(); // Remove the circle from the DOM
-          //     // handleNextBtn();
-          //   }, 3000); // Duration of the fade out animation
-          // }, 1000); // Duration of the circle visibility
+            scoreBox.innerHTML = `<span> Score:${score}</span>`
+            // Add the redcircle to the image container
+            quesImageBox.appendChild(redCircle);
 
-        } else {
-          // console.log('Message: Clicked, but not at the specific point.');
-          // score = score - 5;
-          scoreBox.innerHTML = `<span> Score:${score}</span>`
-
-          let redCircle = document.createElement('div');
-          redCircle.classList.add('redCircle');
-          redCircle.style.width = (2 * clueRadius) + '%';
-          redCircle.style.height = (2 * clueRadius) + '%';
-          redCircle.style.left = (x - clueRadius) + '%';
-          redCircle.style.top = (y - clueRadius) + '%';
-
-          // Add the redcircle to the image container
-          quesImageBox.appendChild(redCircle);
-
-          // Animate the redcircle
-          setTimeout(function() {
-            redCircle.style.opacity = '0'; // Fade out the circle
+            // Animate the redcircle
             setTimeout(function() {
-              redCircle.remove(); // Remove the circle from the DOM
-            }, 500); // Duration of the fade out animation
-          }, 1000); // Duration of the circle visibility
-
-          ansBox.innerHTML = `Wrong Clue &#10060`
-          setTimeout(function() {
-            ansBox.innerHTML = '';
-          }, 3000);
-        }
-
-      });
+              redCircle.style.opacity = '0'; // Fade out the circle
+              setTimeout(function() {
+                redCircle.remove(); // Remove the circle from the DOM
+              }, 500); // Duration of the fade out animation
+            }, 1000); // Duration of the circle visibility
+            ansBox.innerHTML = `Wrong Clue &#10060`
+            setTimeout(function() {
+              ansBox.innerHTML = '';
+            }, 3000);
+          }
+        });
+      }
     }
 
 
@@ -214,7 +206,9 @@ const data = [
 
 
     const handleNextBtn = () => {
-      currentQuestion++;
+      if (currentQuestion <= totalQuestions) {
+        currentQuestion++;
+      }
       loadPuzzle();
       circle.remove();
     }
@@ -226,7 +220,8 @@ const data = [
       loadPuzzle();
     }
 
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       handleNextBtn();
     })
     prevBtn.addEventListener('click', () => {
