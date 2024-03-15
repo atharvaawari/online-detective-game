@@ -22,7 +22,6 @@ const data = [
     `,
     cordinateX: 37,
     cordinateY: 43,
-    imageClueRadius:5,
   },
   {
     question: `<p><strong>Part 2: The Witnesses</strong></p>
@@ -39,7 +38,6 @@ const data = [
     `,
     cordinateX: 37,
     cordinateY: 19,
-    imageClueRadius:5,
   },
   {
     question: `<p><strong>Part 3: The Solution</strong></p>
@@ -53,7 +51,6 @@ const data = [
       `,
       cordinateX: 12,
       cordinateY: 71,
-      imageClueRadius:7,
   }
 ];
 %>
@@ -77,12 +74,9 @@ const data = [
         <h1>Detective IQ Challenge 18 </h1>
 
         <article id="contentBox">
-
-          <div id="quesBox">Dummy</div>
-          <!-- <div id="imageBox">
-            <img id="puzzleImage" src="" alt="puzzle-Image">
-          </div> -->
-
+          <div id="quesBox">
+            <!-- ///Content//// -->
+          </div>
           <div class="btnBox">
             <button id="prevBtn">Prev</button>
             <div id="score"></div>
@@ -103,15 +97,19 @@ const data = [
     const prevBtn = document.getElementById('prevBtn')
     const scoreBox = document.getElementById('score')
     const ansBox = document.getElementById('ansBox')
-    const circle = document.createElement('div');
+    const contentBox = document.getElementById('contentBox')
+    const quizContainer = document.getElementsByClassName('quiz-container')
+    const circle = document.createElement('div')
 
 
-    let currentQuestion = 0;
+
     const puzzleData = <%- JSON.stringify(data) %>;
     let totalQuestions = puzzleData.length;
+    let currentQuestion = 0;
     let score = 0;
+    let clueRadius = 5;
 
-    const loadPuzzle = () => {
+    const loadPuzzle = (classCss) => {
       if (currentQuestion >= totalQuestions) {
         endPuzzle()
         submitPuzzle();
@@ -119,7 +117,6 @@ const data = [
       if (currentQuestion === 1) {
         prevBtn.style.display = "block";
       }
-
       const puzzleQuestion = puzzleData[currentQuestion]
       // console.log('puzzle:', puzzleQuestion);
       queBox.innerHTML = `${puzzleQuestion.question}`;
@@ -129,7 +126,6 @@ const data = [
       // console.log(quesImageBox)
       // console.log(quesImage)
       // puzzleImage.src = quesBox.src;
-
       scoreBox.innerHTML = `<span>Score:${score}</span>`
 
       if (quesImage) {
@@ -139,7 +135,7 @@ const data = [
           // Define the specific point you want to check (example: x=100, y=100)
           let clueX = puzzleQuestion.cordinateX;
           let clueY = puzzleQuestion.cordinateY;
-          let clueRadius = puzzleQuestion.imageClueRadius;
+          // let clueRadius = puzzleQuestion.imageClueRadius;
 
           // Get the position of the click relative to the image
           var rect = event.target.getBoundingClientRect();
@@ -168,7 +164,6 @@ const data = [
             // Add the circle to the image container
             quesImageBox.appendChild(circle);
 
-
           } else {
             // console.log('Message: Clicked, but not at the specific point.');
             let redCircle = document.createElement('div');
@@ -196,20 +191,20 @@ const data = [
           }
         });
       }
+      queBox.classList.add('show');
     }
-
 
     const startPuzzle = () => {
       currentQuestion = 0;
       prevBtn.style.display = "block";
     }
 
-
     const handleNextBtn = () => {
       if (currentQuestion <= totalQuestions) {
         currentQuestion++;
+        loadPuzzle();
+        queBox.classList.add('show');
       }
-      loadPuzzle();
       circle.remove();
     }
     const handlePrevBtn = () => {
@@ -218,6 +213,7 @@ const data = [
         prevBtn.style.display = "none";
       }
       loadPuzzle();
+      queBox.classList.add('show');
     }
 
     nextBtn.addEventListener('click', (e) => {
