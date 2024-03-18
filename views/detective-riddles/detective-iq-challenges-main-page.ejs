@@ -143,7 +143,7 @@ const data = [
             puzzleImageBox.appendChild(circle); // Add the circle to the image container
             score = score + 5;
             scoreBox.innerHTML = `<span>Score:${score}</span>`
-            puzzleImage.removeEventListener('click', imageClick)
+            puzzleImage.removeEventListener('click', imageClick) //restrict multiple clicks after correct
             puzzleImage.style.cursor = "auto";
           } else {
             let redCircle = document.createElement('div');
