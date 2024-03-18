@@ -143,6 +143,8 @@ const data = [
             puzzleImageBox.appendChild(circle); // Add the circle to the image container
             score = score + 5;
             scoreBox.innerHTML = `<span>Score:${score}</span>`
+            puzzleImage.removeEventListener('click', imageClick)
+            puzzleImage.style.cursor = "auto";
           } else {
             let redCircle = document.createElement('div');
             redCircle.classList.add('redCircle');
@@ -187,7 +189,7 @@ const data = [
         }
         circle.remove();
       }
-       ///Previous button-----------
+      ///Previous button-----------
       const handlePrevBtn = () => {
         currentQuestion--;
         if (currentQuestion === 0) {
