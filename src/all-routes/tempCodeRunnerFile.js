@@ -1,1 +1,1 @@
-currantWeek
+nextWeek
