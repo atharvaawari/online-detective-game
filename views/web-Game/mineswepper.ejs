@@ -10,10 +10,10 @@
 
 <body>
   <img id="bg-img" src="/static/assests/bg-image.png" style="z-index: -2;" alt="bg image">
-  <div class="main-Container">
-    <div>
-      <h1>More-Game</h1>
-      <div id="leftSide-Bar">
+  <main class="main-Container">
+    <div class="box">
+      <div id="leftSide-Bar" >
+        <h1 style="text-align: center; width: 100%;">More-Game</h1>
         <div class="item">item1</div>
         <div class="item">item2</div>
         <div class="item">item3</div>
@@ -22,8 +22,6 @@
         <div class="item">item6</div>
         <div class="item">item7</div>
         <div class="item">item8</div>
-        <div class="item">item9</div>
-        <div class="item">item10</div>
       </div>
     </div>
     <div class="centerContainer">
@@ -36,32 +34,81 @@
           </button>
           <div class="lowerBox">
             <div class="loginBox">
-                <h4>Save your progress to keep going!</h4>
-                <button id="loginBtn">Login</button>
-              </div>
-              <div id="likeUnlike">
-                <img src="/static/assests/likeBtn.svg" alt="like">
-                <img src="/static/assests/unlikeBtn.svg" alt="unlike">
-              </div>
+              <h4>Save your progress to keep going!</h4>
+              <a id="loginBtn" href="">Login</a>
+            </div>
+            <div id="likeUnlike">
+              <img src="/static/assests/likeBtn.svg" alt="like">
+              <img src="/static/assests/unlikeBtn.svg" alt="unlike">
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="rigthSide_Bar">
+    <div id="rigthSide_Bar" class="box">
       <div class="leadBoard2048">
         <div class="textBox">
           <h3>leadboard 2048</h3>
         </div>
-        <div class="boardBox"></div>
+        <ul class="leadboardList">
+          <li>
+            <p>1.<img src="/static/assests/Teena.svg" alt=""> <strong>Teena</strong> </p> <img src="/static/assests/ind.svg" alt=""> <span>628</span>
+          </li>
+          <li>
+            <p>2. <img src="/static/assests/vivek.svg" alt=""> <strong>Vivek</strong> </p><img src="/static/assests/ind.svg" alt=""> <span>600</span>
+          </li>
+          <li>
+            <p>3. <img src="/static/assests/atharva.svg" alt=""> <strong>Atharva</strong> </p> <img src="/static/assests/ind.svg" alt=""> <span>590</span>
+          </li>
+          <li>
+            <p>4. <img src="/static/assests/piyush.svg" alt=""> <strong>Piyush</strong> </p> <img src="/static/assests/ind.svg" alt=""> <span>570</span>
+          </li>
+          <li>
+            <p>5. <img src="/static/assests/reena.svg" alt=""> <strong>Reena</strong> </p> <img src="/static/assests/ind.svg" alt=""> <span>530</span>
+          </li>
+          <li>
+            <p>6. <img src="/static/assests/anurag.svg" alt=""> <strong>Anurag</strong> </p> <img src="/static/assests/ind.svg" alt=""> <span>502</span>
+          </li>
+
+        </ul>
       </div>
       <div class="leadBoardAllGames">
         <div class="textBox">
           <h3>leadboard All Games</h3>
         </div>
-        <div class="boardBox"></div>
+        <!-- listContent -->
+        Comming... soon
       </div>
     </div>
-  </div>
+  </main>
+  <section class="gamesAndDetials">
+    <div id="gameBoxes">
+      <div class="game">Game</div>
+      <div class="game">Game</div>
+      <div class="game">Game</div>
+      <div class="game">Game</div>
+      <div class="game">Game</div>
+      <div class="game">Game</div>
+    </div>
+    <div class="details">
+      <h3 style="text-align: center; width: 100%; background-color: #facf48; border-radius: .6rem .6rem 0 0; padding: 0.7rem;">Game Details</h3>
+      <div class="detailBox">
+        <ul class="DetailsList">
+          <li>Game Name :</li>
+          <li>Rating :</li>
+          <li>Game Description :
+            <ul class="subDetailList">
+              <li>How to play</li>
+              <li>Tips and tricks</li>
+              <li>control</li>
+              <li>Game play videos</li>
+            </ul>
+          </li>
+          <li>Tags</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 </body>
 
 </html>
